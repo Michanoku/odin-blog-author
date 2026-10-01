@@ -1,2 +1,2 @@
-# odin-blog-admin
-The admin site for Odin Blog API project 
+# odin-blog-author
+The author site for Odin Blog API project 
