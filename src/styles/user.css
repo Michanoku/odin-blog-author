@@ -1,0 +1,22 @@
+.userView {
+  grid-column: 1 / -1;
+  color: var(--color-text);
+}
+
+.userHeader,
+.formError {
+  margin: 1rem;
+  text-align: center;
+}
+
+.userForm {
+  width: min(100%, 30rem);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  height: 100%;
+}
+
+

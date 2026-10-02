@@ -1,0 +1,17 @@
+.navLink {
+  display: inline-block;
+  font-size: 1.125rem;
+  text-decoration: none;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.navLink.back {
+  margin-bottom: 1.5rem;
+}
+
+.navLink:hover {
+  color: var(--color-muted);
+}

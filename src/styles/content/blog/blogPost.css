@@ -1,0 +1,26 @@
+.blogBody {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.blogCategories {
+  display: flex;
+  justify-content: start;
+}
+
+.blogCategory {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.blogPostButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editForm {
+  margin-bottom: 1.5rem;
+}
