@@ -64,7 +64,7 @@ function ThemeToggle({ theme, themeToggle }) {
 // The header function
 export default function Header({ theme, themeToggle }) {
   return (
-    <header>
+    <header className="responsivePadding">
       <nav>
         <h1 className="siteTitle">Michanoku AUTHOR</h1>
         <div className="icons">

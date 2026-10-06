@@ -59,7 +59,7 @@ function App() {
     <>
       <Header theme={theme} themeToggle={themeToggle} />
 
-      <main>
+      <main className="responsivePadding">
         <Routes>
           <Route path="/login" element={<Login setUser={setUser} />} />
 
@@ -69,7 +69,10 @@ function App() {
             <Route path="/" element={<Content user={user} />} />
             <Route path="/posts/new" element={<Content user={user} />} />
             <Route path="/posts/:postId" element={<Content user={user} />} />
-            <Route path="/category/:category" element={<Content user={user} />} />
+            <Route
+              path="/category/:category"
+              element={<Content user={user} />}
+            />
             <Route
               path="/profile"
               element={<Profile user={user} setUser={setUser} />}
