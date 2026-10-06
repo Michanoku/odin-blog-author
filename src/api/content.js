@@ -95,6 +95,12 @@ export async function updatePost(
   postCategory,
   published,
 ) {
+  const data = {
+    postTitle,
+    postBody,
+    postCategory,
+    published,
+  };
   const path = `author/posts/${postId}`;
   const options = {
     method: "PUT",
@@ -102,7 +108,7 @@ export async function updatePost(
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    body: JSON.stringify({ postTitle, postBody, postCategory, published }),
+    body: JSON.stringify(data),
   };
   return contactAPI(path, options);
 }

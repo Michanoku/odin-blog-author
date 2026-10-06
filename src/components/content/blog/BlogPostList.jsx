@@ -1,6 +1,7 @@
-import { ArrowLeft } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+
 import { getPosts } from "../../../api/content.js";
 import "../../../styles/content/blog/blogPostList.css";
 
@@ -33,8 +34,13 @@ function BlogPostLink({ post }) {
             : "Unpublished"}
         </span>
       </div>
-      <h3 className="contentHeader blogPostListCenter">{post.title} <span className={`statusDot ${post.published ? "published" : "unpublished"}`} /></h3>
-      
+      <h3 className="contentHeader blogPostListCenter">
+        {post.title}{" "}
+        <span
+          className={`statusDot ${post.published ? "published" : "unpublished"}`}
+        />
+      </h3>
+
       <div>{truncateText(post.body, 150)}</div>
       <Link className="blogPostLink contentSpacing" to={`/posts/${post.id}`}>
         Open post
@@ -45,15 +51,19 @@ function BlogPostLink({ post }) {
 
 // The list of blog articles
 export function BlogPostList({ setCategories, category }) {
+  // ALL posts
   const [allPosts, setAllPosts] = useState([]);
+  // Displayed posts
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
+  // GEt all posts and set the categories
   useEffect(() => {
     getPosts().then((posts) => {
       setAllPosts(posts);
       setPosts(posts);
 
+      // Set unique categories
       const uniqueCategories = [
         ...new Set(posts.map((post) => post.category).filter(Boolean)),
       ];
@@ -62,6 +72,7 @@ export function BlogPostList({ setCategories, category }) {
     });
   }, []);
 
+  // If a category was provided, filter the posts accordingly, else set all
   useEffect(() => {
     const newPosts = category
       ? allPosts.filter((post) => post.category === category)
@@ -70,6 +81,7 @@ export function BlogPostList({ setCategories, category }) {
     setPosts(newPosts);
   }, [category, allPosts]);
 
+  // If we are looking at a category, provide a back button to get back to all
   const back = category ? (
     <Link className="navLink" to="/">
       <ArrowLeft />

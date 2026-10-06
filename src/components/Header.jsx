@@ -1,13 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { User, UserPen, LogOut, Sun, Moon, House, LayoutDashboard } from "lucide-react";
+import {
+  House,
+  LayoutDashboard,
+  LogOut,
+  Moon,
+  Sun,
+  User,
+  UserPen,
+} from "lucide-react";
+
 import urls from "../api/urls.js";
 import "../styles/header.css";
 
 // The user menu dropdown component
 function Dropdown() {
+  // Used for opening and closing the dropdown
   const [open, setOpen] = useState(false);
 
+  // If the user wants to logout, simply remove the token and navigate to frontend
   function logoutUser(event) {
     event.preventDefault();
     localStorage.removeItem("token");
@@ -15,6 +26,7 @@ function Dropdown() {
     window.location = urls.frontend;
   }
 
+  // IF the user clicks outside the dropdown, close it
   useEffect(() => {
     function handleClick(event) {
       // Close dropdown if clicked outside
@@ -28,7 +40,7 @@ function Dropdown() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
-  // When the dropdown is toggle, flip open
+  // When the dropdown is toggled, open it or close it
   function toggleDropdown() {
     setOpen(!open);
   }

@@ -1,7 +1,9 @@
-import { User } from "lucide-react";
 import { Link } from "react-router-dom";
+import { User } from "lucide-react";
+
 import "../../styles/content/contentAside.css";
 
+// Simple aside bar showing username and categories
 export function ContentAside({ user, categories }) {
   return (
     <aside>

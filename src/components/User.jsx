@@ -1,20 +1,25 @@
-import { loginAPI, updateAPI } from "../api/auth.js";
-import "../styles/user.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { loginAPI, updateAPI } from "../api/auth.js";
+import "../styles/user.css";
+
+// The user login component
 export function Login({ setUser }) {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
+  // Login the user
   async function loginUser(event) {
     event.preventDefault();
     setError(null);
 
     try {
+      // Take the data and send it to the API, get the token and user back
       const formData = new FormData(event.currentTarget);
       const { token, user } = await loginAPI(formData);
 
+      // Set the token in local storage and the user in the state
       localStorage.setItem("token", token);
       setUser(user);
       navigate("/");
@@ -50,6 +55,7 @@ export function Login({ setUser }) {
   );
 }
 
+// The profile component
 export function Profile({ user, setUser }) {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -58,14 +64,17 @@ export function Profile({ user, setUser }) {
     return navigate("/login");
   }
 
+  // Update the user data
   async function updateUser(event) {
     event.preventDefault();
     setError(null);
 
     try {
+      // Take the data and send it to the API, get the user back
       const formData = new FormData(event.currentTarget);
       const { user } = await updateAPI(formData);
 
+      // Set the user in the state
       setUser(user);
       navigate("/");
     } catch (error) {

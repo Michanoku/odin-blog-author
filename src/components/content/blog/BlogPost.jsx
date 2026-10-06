@@ -1,22 +1,28 @@
-import { ArrowLeft, SquarePen, Trash } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, SquarePen, Trash } from "lucide-react";
+
 import {
+  getAllComments,
+  deletePost,
   getPosts,
   getSinglePost,
   updatePost,
-  deletePost,
-  getAllComments,
 } from "../../../api/content.js";
 import { CommentSection } from "./CommentSection.jsx";
 import "../../../styles/content/blog/blogPost.css";
 
+// A single blog post
 export function BlogPost({ postId, setCategories }) {
+  // The post data
   const [post, setPost] = useState(null);
+  // Used when editing the post
   const [edit, setEdit] = useState(false);
+  // The comment data
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
+  // Set the unique categories from available posts
   useEffect(() => {
     getPosts().then((posts) => {
       const uniqueCategories = [
@@ -27,6 +33,7 @@ export function BlogPost({ postId, setCategories }) {
     });
   }, []);
 
+  // Get the post and comments from the postid and set them both
   useEffect(() => {
     Promise.all([getSinglePost(postId), getAllComments(postId)]).then(
       ([post, comments]) => {
@@ -36,11 +43,14 @@ export function BlogPost({ postId, setCategories }) {
     );
   }, [postId]);
 
+  // Send the post data to the API function
   async function editPost(event) {
     event.preventDefault();
+    // Gather the data
     const form = event.currentTarget;
     const formData = new FormData(form);
     try {
+      // Send data to the API and reset the form
       const updatedPost = await updatePost(
         postId,
         formData.get("postTitle"),
@@ -49,6 +59,7 @@ export function BlogPost({ postId, setCategories }) {
         formData.get("published") === "on",
       );
       form.reset();
+      // Switch to post view and set the new data
       setEdit(false);
       setPost(updatedPost);
     } catch (error) {
@@ -56,10 +67,13 @@ export function BlogPost({ postId, setCategories }) {
     }
   }
 
+  // Remove a post
   async function removePost() {
+    // Confirm with the user about the action
     const confirmation = confirm("Are you sure you want to delete this post?");
     if (confirmation) {
       try {
+        // Send the delete request to the api and navigate home
         await deletePost(postId);
         navigate("/");
       } catch (error) {
@@ -68,10 +82,12 @@ export function BlogPost({ postId, setCategories }) {
     }
   }
 
+  // If there is no post, show loading
   if (!post) {
     return <div>Loading...</div>;
   }
 
+  // If the user is editing, show the form, otherwise the post body
   const body = edit ? (
     <form className="contentWidth editForm" onSubmit={editPost}>
       <label htmlFor="postTitle">Title</label>
