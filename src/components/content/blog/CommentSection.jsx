@@ -6,7 +6,7 @@ import {
   updateComment,
   deleteComment,
 } from "../../../api/content.js";
-import "../../../styles/content/blog/CommentSection.css";
+import "../../../styles/content/blog/commentSection.css";
 
 // A single comment
 function Comment({ comment, editComment, removeComment }) {
