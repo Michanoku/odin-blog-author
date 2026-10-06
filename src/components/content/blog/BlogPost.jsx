@@ -22,6 +22,9 @@ export function BlogPost({ postId, setCategories }) {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
+  // The published checkbox state
+  const [published, setPublished] = useState(false);
+
   // Set the unique categories from available posts
   useEffect(() => {
     getPosts().then((posts) => {
@@ -42,6 +45,13 @@ export function BlogPost({ postId, setCategories }) {
       },
     );
   }, [postId]);
+
+  // Set the checkbox data
+  useEffect(() => {
+    if (post) {
+      setPublished(post.published);
+    }
+  }, [post]);
 
   // Send the post data to the API function
   async function editPost(event) {
@@ -108,7 +118,7 @@ export function BlogPost({ postId, setCategories }) {
         <input
           type="checkbox"
           name="published"
-          checked={post.published}
+          checked={published}
           onChange={(event) => setPublished(event.target.checked)}
         />
         Publish

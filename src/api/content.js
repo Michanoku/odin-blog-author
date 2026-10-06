@@ -75,6 +75,12 @@ export async function deleteComment(postId, commentId) {
 
 // Post a new post
 export async function postPost(postTitle, postBody, postCategory, published) {
+  const data = {
+    postTitle,
+    postBody,
+    postCategory,
+    published,
+  }
   const path = "author/posts/";
   const options = {
     method: "POST",
@@ -82,7 +88,7 @@ export async function postPost(postTitle, postBody, postCategory, published) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    body: JSON.stringify({ postTitle, postBody, postCategory, published }),
+    body: JSON.stringify(data),
   };
   return contactAPI(path, options);
 }

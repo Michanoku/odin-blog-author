@@ -2,6 +2,16 @@
 
 Author frontend application for The Odin Project  Blog project, built with **React** and **Vite**.
 
+## Project Repositories
+
+The Odin Project Blog is split across three repositories:
+
+| Part                | Repository                                                                              |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| **Backend**         | [odin-blog-backend](https://github.com/Michanoku/odin-blog-backend)                     |
+| **Frontend**        | [odin-blog-frontend](https://github.com/Michanoku/odin-blog-frontend)                   |
+| **Author**          | **This repository**                                                                     |
+
 ## Overview
 
 The author frontend provides an authenticated interface for managing blog content and user information.
